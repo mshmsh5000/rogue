@@ -4,6 +4,7 @@ namespace Rogue\Http\Transformers;
 
 use Rogue\Models\Post;
 use League\Fractal\TransformerAbstract;
+use Rogue\Http\Transformers\SignupTransformer;
 
 class PostTransformer extends TransformerAbstract
 {
@@ -15,6 +16,14 @@ class PostTransformer extends TransformerAbstract
      */
     public function transform(Post $post)
     {
+        $signup = $post->signup;
+
+        if (! is_null($signup->quantity_pending) && is_null($signup->quantity)) {
+            $quantity = $signup->quantity_pending;
+        } else {
+            $quantity = $signup->quantity;
+        }
+
         return [
             'id' => $post->id,
             'signup_id' => $post->signup_id,
@@ -30,6 +39,17 @@ class PostTransformer extends TransformerAbstract
             'remote_addr' => $post->remote_addr,
             'created_at' => $post->created_at->toIso8601String(),
             'updated_at' => $post->updated_at->toIso8601String(),
+            'signup' => [
+                'signup_id' => $signup->id,
+                'northstar_id' => $signup->northstar_id,
+                'campaign_id' => $signup->campaign_id,
+                'campaign_run_id' => $signup->campaign_run_id,
+                'quantity' => $quantity,
+                'why_participated' => $signup->why_participated,
+                'signup_source' => $signup->source,
+                'created_at' => $signup->created_at->toIso8601String(),
+                'updated_at' => $signup->updated_at->toIso8601String(),
+            ],
         ];
     }
 }
