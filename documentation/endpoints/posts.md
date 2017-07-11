@@ -51,7 +51,18 @@ Example Response:
     "remote_addr": "207.110.19.130",
     "post_source": "runscope",
     "created_at": "2017-02-15T18:14:58+0000",
-    "updated_at": "2017-02-15T18:14:58+0000"
+    "updated_at": "2017-02-15T18:14:58+0000",
+    "signup": {
+      "signup_id": 4643,
+      "northstar_id": "94958304d9w09293",
+      "campaign_id": 1631,
+      "campaign_run_id": 1903,
+      "quantity": 500,
+      "why_participated": "TEST123456",
+      "signup_source": null,
+      "created_at": "2017-03-29T13:37:16+00:00",
+      "updated_at": "2017-07-11T21:23:16+00:00"
+    },
   }
 }
 ```
